@@ -1,3 +1,7 @@
 /.idea
 /.vscode
 /output
+*.avi
+*.mp4
+*.pyc
+/video_frames
