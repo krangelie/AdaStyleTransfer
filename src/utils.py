@@ -47,11 +47,14 @@ def store_video_as_frames(content_video_path, frame_path):
         reader = imageio.get_reader(content_video_path)
         os.makedirs(video_path, exist_ok=True)
         for i, im in enumerate(reader):
-            imageio.imwrite(
-                os.path.join(video_path, f"{str(i).zfill(4)}.png"),
-                im,
-                format="png",
-            )
+            if not os.path.isfile(
+                os.path.join(video_path, f"{str(i).zfill(4)}.png")
+            ):
+                imageio.imwrite(
+                    os.path.join(video_path, f"{str(i).zfill(4)}.png"),
+                    im,
+                    format="png",
+                )
 
         print("Finished writing frames.")
     return video_path

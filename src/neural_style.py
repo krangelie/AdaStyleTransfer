@@ -197,6 +197,16 @@ def run_style_transfer(
             loss = style_score + content_score
             loss.backward()
 
+            print(input_img.data.shape)
+            transform = transforms.ToPILImage()
+            image = (
+                input_img.clone()
+            )  # we clone the tensor to not do changes on it
+            image = image.data.clamp_(0, 1)
+            image = image.cpu().squeeze(0)
+            transform(image).save(
+                os.path.join(output_path, f"{str(run[0]).zfill(4)}.png")
+            )
             run[0] += 1
             if run[0] % 50 == 0:
                 print("run {}:".format(run))
@@ -210,11 +220,6 @@ def run_style_transfer(
             return style_score + content_score
 
         optimizer.step(closure)
-        print(input_img.data.shape)
-        transform = transforms.ToPILImage()
-        transform(input_img.data.clamp_(0, 1)[0]).save(
-            os.path.join(output_path, f"{str(run[0]).zfill(4)}.png")
-        )
 
     # a last correction...
     input_img.data.clamp_(0, 1)

@@ -64,12 +64,12 @@ def main(args):
             output_subpath,
         )
 
-    plt.figure()
-    imshow(output, title="Output image")
+    # plt.figure()
+    # imshow(output, title="Output image")
 
     # sphinx_gallery_thumbnail_number = 4
-    plt.ioff()
-    plt.show()
+    # plt.ioff()
+    # plt.show()
 
 
 if __name__ == "__main__":
